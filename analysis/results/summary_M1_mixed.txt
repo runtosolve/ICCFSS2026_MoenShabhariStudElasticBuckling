@@ -1,0 +1,15 @@
+362S162-33 stud, L = 96 in (2438.4 mm), uniform compression, pinned warping-free ends, braced at midheight (Lx = Ly = Lt = 48 in)
+SFIA service holes 38.099999999999994 x 101.6 mm at z = [304.79999999999995, 914.3999999999999, 1523.9999999999998, 2133.5999999999995] mm
+Ferrite.jl + QuadShellFiniteElement.jl (38592 quadrilaterals) + TriShellFiniteElement.jl (4136 triangles); 41333 nodes, 42728 shells, 247998 dofs, dz = 4.997 mm, section nodes = 85
+E = 200000.0 MPa, ν = 0.3, t = 0.87884 mm, A = 170.72810421036928 mm²; Cs = tri 0.2, quad 0.1; brace = corners_x
+Timings [s]: assemble_K = 5.7, assemble_Kg = 1.84, eigs_lowest = 8.36, factorization = 9.2, shift_invert_total = 284.15, static_solve = 3.16, stresses = 0.41
+
+name, scan_index, Pcr_N, Pcr_kN, Pcr_kips, fcr_MPa, fcr_ksi, class, rb_frac, fl, wf, hole_frac, hole_ratio, hw_web, hw_tip, hw_tip_seg1, hw_tip_seg2, global_description
+Lowest local, 1, 15684.830, 15.6848, 3.5261, 91.870, 13.3247, local, 0.170, 0.037, 0.012, 0.003, 0.06, 6, 8, 4, 4, 
+Local at holes, 28, 20103.917, 20.1039, 4.5195, 117.754, 17.0788, local-hole, 0.479, 0.217, 0.021, 0.284, 4.08, 18, 4, 2, 2, 
+Local at holes (first classified), 26, 19826.315, 19.8263, 4.4571, 116.128, 16.8429, local-hole, 0.186, 0.238, 0.040, 0.234, 2.47, 34, 10, 5, 5, 
+Lowest distortional, 86, 35898.121, 35.8981, 8.0702, 210.265, 30.4963, distortional, 0.170, 0.935, 0.219, 0.015, 0.41, 5, 5, 3, 3, 
+Distortional (mixed, first classified), 55, 26016.010, 26.0160, 5.8486, 152.383, 22.1012, distortional, 0.229, 0.515, 0.114, 0.066, 0.89, 30, 10, 5, 5, 
+Global 1, 79, 34665.414, 34.6654, 7.7931, 203.045, 29.4491, global, 0.999, 1.000, 0.628, 0.017, 0.48, 11, 2, 1, 1, strong-axis flexure + torsion
+Global (mixed, first classified), 79, 34665.414, 34.6654, 7.7931, 203.045, 29.4491, global, 0.999, 1.000, 0.628, 0.017, 0.48, 11, 2, 1, 1, strong-axis flexure + torsion
+Global weak-axis, 108, 45955.200, 45.9552, 10.3311, 269.172, 39.0401, global, 0.854, 0.754, 0.591, 0.040, 0.65, 2, 2, 1, 1, weak-axis flexure

@@ -1,0 +1,15 @@
+362S162-33 stud, L = 96 in (2438.4 mm), uniform compression, pinned warping-free ends, braced at midheight (Lx = Ly = Lt = 48 in)
+SFIA service holes 38.099999999999994 x 101.6 mm at z = [304.79999999999995, 914.3999999999999, 1523.9999999999998, 2133.5999999999995] mm
+Ferrite.jl + QuadShellFiniteElement.jl (77184 quadrilaterals) + TriShellFiniteElement.jl (12880 triangles); 84881 nodes, 90064 shells, 509286 dofs, dz = 2.498 mm, section nodes = 85
+E = 200000.0 MPa, ν = 0.3, t = 0.87884 mm, A = 170.72810421036928 mm²; Cs = tri 0.2, quad 0.1; brace = corners_x
+Timings [s]: assemble_K = 8.97, assemble_Kg = 3.9, eigs_lowest = 28.86, factorization = 46.74, shift_invert_total = 688.51, static_solve = 6.21, stresses = 0.5
+
+name, scan_index, Pcr_N, Pcr_kN, Pcr_kips, fcr_MPa, fcr_ksi, class, rb_frac, fl, wf, hole_frac, hole_ratio, hw_web, hw_tip, hw_tip_seg1, hw_tip_seg2, global_description
+Lowest local, 1, 15732.995, 15.7330, 3.5369, 92.152, 13.3656, local, 0.169, 0.038, 0.012, 0.004, 0.06, 6, 8, 4, 4, 
+Local at holes, 29, 20218.261, 20.2183, 4.5452, 118.424, 17.1759, local-hole, 0.481, 0.215, 0.021, 0.392, 4.12, 18, 4, 2, 2, 
+Local at holes (first classified), 25, 19876.739, 19.8767, 4.4685, 116.423, 16.8858, local-hole, 0.183, 0.239, 0.039, 0.319, 2.42, 38, 14, 7, 7, 
+Lowest distortional, 88, 35775.999, 35.7760, 8.0428, 209.550, 30.3926, distortional, 0.166, 0.919, 0.214, 0.024, 0.47, 5, 5, 3, 3, 
+Distortional (mixed, first classified), 55, 25940.517, 25.9405, 5.8317, 151.941, 22.0371, distortional, 0.224, 0.570, 0.121, 0.112, 1.04, 30, 10, 5, 5, 
+Global 1, 79, 34176.047, 34.1760, 7.6831, 200.178, 29.0334, global, 0.999, 0.720, 0.458, 0.048, 1.39, 10, 2, 1, 1, strong-axis flexure + torsion
+Global (mixed, first classified), 79, 34176.047, 34.1760, 7.6831, 200.178, 29.0334, global, 0.999, 0.720, 0.458, 0.048, 1.39, 10, 2, 1, 1, strong-axis flexure + torsion
+Global weak-axis, 114, 46901.974, 46.9020, 10.5440, 274.717, 39.8444, global, 0.929, 0.812, 0.734, 0.087, 0.92, 2, 2, 1, 1, weak-axis flexure

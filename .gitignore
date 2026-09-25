@@ -1,0 +1,7 @@
+# large intermediate outputs (regenerate with the numbered scripts)
+analysis/logs/*.log
+analysis/results/modes_M2_*.jls
+analysis/meshes/stud96_M2_*.jls
+.DS_Store
+analysis/figures/*.pdf
+main.pdf.partial

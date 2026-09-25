@@ -1,0 +1,37 @@
+[deps]
+AISIS100 = "01f7396e-a581-4110-84fa-e8964400bef8"
+Arpack = "7d9fca2a-8960-54d3-9f78-7d1dccf2cb97"
+Bonito = "824d6782-a2ef-11e9-3a09-e5662e0c26f8"
+BucklingModeIdentification = "9d4c2b7e-5a31-4f8c-b6e2-7c0d1a3f5e91"
+CUFSM = "82b4978f-06ae-48e0-88e8-a26b4f7a0fa1"
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+CeeSectionBuckling = "58e103f9-c1dd-473d-8fd2-46aa5cb27d98"
+CrossSectionGeometry = "e5713cf4-1a83-4860-95bf-b82253e75fb4"
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+Ferrite = "c061ca5d-56c9-439f-9c0e-210fe06d3992"
+Gmsh = "705231aa-382f-11e9-3f0c-b7cb4346fdeb"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+LinearMaps = "7a12625a-238d-50fd-b39a-03d52299707e"
+LinesCurvesNodes = "74a74c3a-221d-4cd1-a4eb-c3c8149e7592"
+Pluto = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
+PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+QuadShellFiniteElement = "2cf2d5d9-e904-4f26-b7e7-5697fc87be9e"
+SectionProperties = "03320fb2-42b0-43fd-9b66-b95dbaa39193"
+Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+Tensors = "48a634ad-e948-5137-8d70-aa71f2a747f4"
+TriShellFiniteElement = "4f2873d8-418d-4a23-a33c-c2fdbebf1db2"
+WGLMakie = "276b4fcb-3e11-5398-bf8b-a0c2d153d008"
+
+[sources]
+AISIS100 = {path = "/Users/crismoen/.julia/dev/AISIS100"}
+BucklingModeIdentification = {path = "/Users/crismoen/.julia/dev/BucklingModeIdentification"}
+CUFSM = {path = "/Users/crismoen/.julia/dev/CUFSM"}
+CeeSectionBuckling = {path = "/Users/crismoen/.julia/dev/CeeSectionBuckling"}
+CrossSectionGeometry = {path = "/Users/crismoen/.julia/dev/CrossSectionGeometry"}
+LinesCurvesNodes = {path = "/Users/crismoen/.julia/dev/LinesCurvesNodes"}
+QuadShellFiniteElement = {path = "/Users/crismoen/.julia/dev/QuadShellFiniteElement"}
+SectionProperties = {path = "/Users/crismoen/.julia/dev/SectionProperties"}
+TriShellFiniteElement = {path = "/Users/crismoen/.julia/dev/TriShellFiniteElement"}

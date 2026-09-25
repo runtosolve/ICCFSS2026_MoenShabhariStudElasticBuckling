@@ -1,0 +1,22 @@
+quantity, value_kN, value_kips, half_wavelength_mm, note
+CUFSM Pcrl gross, 15.8663, 3.5669, 70.0, signature curve minimum
+CUFSM Pcrd gross, 36.5755, 8.2225, 460.0, signature curve minimum
+CUFSM global S-S 48 in (m = 1), 36.5449, 8.2156, 1219.2, single half-wave over the braced length
+CUFSM 48 in m = 2, 40.7513, 9.1613, 609.6, two half-waves over the braced length
+CUFSM 48 in m = 3, 37.3789, 8.4031, 406.4, three half-waves over the braced length
+CSB Pcrl gross (FE-matched r), 15.8996, 3.5744, 70.2,
+CSB Pcrd gross (FE-matched r), 36.6720, 8.2442, 450.2,
+CSB Pcrl hole (FE-matched r), 24.4689, 5.5008, 61.1, net section through the hole
+CSB Pcrd hole (FE-matched r), 34.7612, 7.8146, 450.2, AISI S100 reduced web thickness
+CSB Pcrl gross (SFIA r), 15.9744, 3.5912, 70.4,
+CSB Pcrd gross (SFIA r), 36.0819, 8.1115, 450.2,
+CSB Pcrl hole (SFIA r), 24.6619, 5.5442, 58.5, net section through the hole
+CSB Pcrd hole (SFIA r), 34.2242, 7.6939, 450.2, AISI S100 reduced web thickness
+Analytical Pex gross, 309.3708, 69.5493, 1219.2,
+Analytical Pey gross, 55.9779, 12.5843, 1219.2,
+Analytical Pt gross, 39.3329, 8.8424, 1219.2,
+Analytical PFT gross, 37.2538, 8.3750, 1219.2,
+Analytical Pcre gross, 37.2538, 8.3750, 1219.2, min(PFT and flexure about the non-symmetry axis)
+Analytical PFT weighted-average (holes), 31.0991, 6.9914, 1219.2, AISI S100 net-section weighted average
+Analytical Pey weighted-average (holes), 54.3539, 12.2192, 1219.2,
+Analytical Pcre weighted-average (holes), 31.0991, 6.9914, 1219.2,

@@ -1,0 +1,14 @@
+mode, M1_mixed kN, M1_mixed kips, M2_mixed kN, M2_mixed kips, baseline kN, baseline kips, baseline note
+Local, lowest, 15.685, 3.526, 15.733, 3.537, 15.866, 3.567, CUFSM gross-section signature minimum, 70 mm
+Local, gross section (CeeSectionBuckling), , , , , 15.900, 3.574, CeeSectionBuckling gross, 70 mm
+Local at the holes (web strips), 20.104, 4.520, 20.218, 4.545, 24.469, 5.501, CeeSectionBuckling net section, 61 mm
+Distortional, 3 half-waves per segment, 35.898, 8.070, 35.776, 8.043, 34.761, 7.815, AISI S100 reduced web thickness, 450 mm
+Distortional, gross, , , , , 36.672, 8.244, CeeSectionBuckling gross, 450 mm; CUFSM at L/3 = 406 mm: 37.38 kN
+Distortional–hole interaction, 5 half-waves per segment, 32.090, 7.214, 31.792, 7.147, , , no finite strip counterpart
+Global, flexural-torsional, 34.665, 7.793, 34.176, 7.683, 37.254, 8.375, analytical, gross section, KL = 1219 mm
+Global, weighted-average net, , , , , 31.099, 6.991, analytical, AISI S100 weighted-average net properties
+Global, weak-axis flexure, 45.955, 10.331, 46.902, 10.544, 55.978, 12.584, analytical weak-axis flexure, gross
+
+model, element, dofs, cells, assemble_K_s, static_solve_s, assemble_Kg_s, factorization_s, eigs_lowest_s, shift_invert_total_s
+M1_mixed, mixed, 247998, , 5.7, 3.2, 1.8, 9.2, 8.4, 284.2
+M2_mixed, mixed, 509286, , 9.0, 6.2, 3.9, 46.7, 28.9, 688.5

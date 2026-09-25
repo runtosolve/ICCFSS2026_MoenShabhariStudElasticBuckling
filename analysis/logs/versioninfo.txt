@@ -1,0 +1,36 @@
+Julia Version 1.13.0
+Commit d1c37793dd2 (2026-09-09 19:00 UTC)
+Build Info:
+  Official https://julialang.org release
+Platform Info:
+  OS: macOS (arm64-apple-darwin25.6.0)
+  CPU: 14 × Apple M3 Max
+  WORD_SIZE: 64
+  LLVM: libLLVM-20.1.8 (ORCJIT, apple-m3)
+  GC: Built with stock GC
+Threads: 1 default, 1 interactive, 1 GC (on 14 virtual cores)
+
+Status `~/Library/CloudStorage/GoogleDrive-cris.moen@runtosolve.com/Shared drives/RunToSolve/Papers/Moen_Shabhari_2026_ICCFSS 2026/paper/analysis/Project.toml`
+  [01f7396e] AISIS100 v0.2.0 `~/.julia/dev/AISIS100`
+  [7d9fca2a] Arpack v0.5.4
+  [824d6782] Bonito v5.2.0
+  [9d4c2b7e] BucklingModeIdentification v0.1.0 `~/.julia/dev/BucklingModeIdentification`
+  [82b4978f] CUFSM v0.1.0 `~/.julia/dev/CUFSM`
+  [13f3f980] CairoMakie v0.15.15
+  [58e103f9] CeeSectionBuckling v0.5.0 `~/.julia/dev/CeeSectionBuckling`
+  [e5713cf4] CrossSectionGeometry v0.2.0 `~/.julia/dev/CrossSectionGeometry`
+  [8bb1440f] DelimitedFiles v1.9.1
+  [c061ca5d] Ferrite v1.7.0
+  [705231aa] Gmsh v0.3.1
+  [7a12625a] LinearMaps v3.11.4
+  [74a74c3a] LinesCurvesNodes v0.1.1 `~/.julia/dev/LinesCurvesNodes`
+  [2cf2d5d9] QuadShellFiniteElement v0.2.0 `~/.julia/dev/QuadShellFiniteElement`
+  [03320fb2] SectionProperties v0.1.0 `~/.julia/dev/SectionProperties`
+  [10745b16] Statistics v1.11.5
+  [48a634ad] Tensors v1.17.1
+  [4f2873d8] TriShellFiniteElement v0.4.0 `~/.julia/dev/TriShellFiniteElement`
+  [276b4fcb] WGLMakie v0.13.15
+  [37e2e46d] LinearAlgebra v1.13.0
+  [de0858da] Printf v1.11.0
+  [9e88b42a] Serialization v1.11.0
+  [2f01184e] SparseArrays v1.13.0
