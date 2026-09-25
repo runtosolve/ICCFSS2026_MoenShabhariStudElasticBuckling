@@ -14,7 +14,7 @@ holes), and compared with
 ## Contents
 | Path | What it is |
 |---|---|
-| `main.typ`, `references.bib`, `images/` | the paper (Typst); `typst compile main.typ` |
+| `main.typ`, `references.bib`, `images/` | the paper (Typst); `typst compile main.typ Moen_Shabhari_ICCFSS_2026_open_source_shell_fea_stud_buckling.pdf` |
 | `analysis/stud_buckling_tools.jl` | shared module: section, hybrid structured-quad + Gmsh triangular hole-patch mesh, mixed-grid dofs (two `SubDofHandler`s), loads, constraints, K / Kg assembly per element type, ARPACK solves, mode classification |
 | `analysis/01_make_meshes.jl` | builds the mixed quadrilateral/triangle grid (`meshes/*.jls`); `--elements=tri` or `quad` give single-element grids |
 | `analysis/02_run_fe.jl` | eigenbuckling: lowest modes + shift-and-invert windows, classification, `results/modes_*.csv/jls`, `summary_*.txt` |
