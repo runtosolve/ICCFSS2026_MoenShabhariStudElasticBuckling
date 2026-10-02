@@ -193,12 +193,12 @@ Pcr = σ .+ 1 ./ real.(ν)
 ---
 
 @eyebrow Results
-# Distortional and global modes, lower 48 in braced segment
+# Distortional and global modes
 
 <img class="fig" src="data/fig_mode_distortional.png" alt="Lowest distortional buckling mode" style="max-height:225px; display:block; margin:0 auto">
-?> Lowest distortional mode, 36.51 kN: three half-waves per braced segment, the brace plane is a node
-<img class="fig" src="data/fig_mode_global.png" alt="Lowest global buckling mode" style="max-height:225px; display:block; margin:0 auto">
-?> Lowest global mode, 35.25 kN: lateral translation plus twist in each segment, one half-wave
+?> Lowest distortional mode, 36.51 kN, lower 48 in braced segment: three half-waves per braced segment, the brace plane is a node
+<img class="fig" src="data/fig_mode_global_full.png" alt="Lowest global buckling mode over the full 96 in member" style="max-height:225px; display:block; margin:0 auto">
+?> Lowest global mode, 35.25 kN, full 96 in member: lateral translation plus twist, one half-wave in each braced segment, the brace at midheight is a node
 
 ---
 

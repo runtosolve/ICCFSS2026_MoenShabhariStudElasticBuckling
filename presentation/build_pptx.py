@@ -229,9 +229,9 @@ picture(s, "fig_mode_local_hole.png", geo[1][0], geo[1][1], geo[1][2], Inches(4.
 textbox(s, Inches(0.9), Inches(6.5), Inches(11.5), Inches(0.4), ["5 mm mesh (top) and 2.5 mm mesh (bottom) in each figure; color is displacement magnitude"], 12, color=MUTED, bullet=False)
 
 # ───────────────────────────── 15 distortional and global ─────────────────────────────
-s = prs.slides.add_slide(L["Title Only"]); set_title(s, "Distortional and global modes, lower 48 in braced segment")
-picture(s, "fig_mode_distortional.png", Inches(1.2), Inches(1.5), Inches(11.0), Inches(2.3), "Lowest distortional mode, 36.51 kN: three half-waves per braced segment, the brace plane is a node")
-picture(s, "fig_mode_global.png", Inches(1.2), Inches(4.3), Inches(11.0), Inches(2.3), "Lowest global mode, 35.25 kN: lateral translation plus twist in each segment, one half-wave")
+s = prs.slides.add_slide(L["Title Only"]); set_title(s, "Distortional and global modes", 32)
+picture(s, "fig_mode_distortional.png", Inches(1.2), Inches(1.5), Inches(11.0), Inches(2.3), "Lowest distortional mode, 36.51 kN, lower 48 in braced segment: three half-waves per braced segment, the brace plane is a node")
+picture(s, "fig_mode_global_full.png", Inches(1.2), Inches(4.3), Inches(11.0), Inches(2.3), "Lowest global mode, 35.25 kN, full 96 in member: lateral translation plus twist, one half-wave in each braced segment, the brace at midheight is a node")
 
 # ───────────────────────────── 16 performance ─────────────────────────────
 s, a, b, geo = two_content("Six minutes on a laptop for a quarter-million dofs")
