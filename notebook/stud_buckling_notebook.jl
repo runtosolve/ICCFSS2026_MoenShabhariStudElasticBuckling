@@ -37,7 +37,7 @@ md"""
 
 Companion notebook to *Moen and Shabhari (2026), Elastic buckling analysis of a cold-formed steel stud column with open-source shell finite element software*, Wei-Wen Yu International Specialty Conference on Cold-Formed Steel Structures.
 
-**Problem.** A 362S162-33 stud (web 92.1 mm, flanges 41.3 mm, lips 12.7 mm, t = 0.879 mm, E = 200 000 MPa, ν = 0.3), 96 in (2438 mm) long, with 1.5 × 4 in SFIA service holes at 24 in on centre, braced at midheight so that Lx = Ly = Lt = 48 in, pinned warping-free ends, uniform compression.  We compute the elastic local, distortional, and global buckling loads and look at the mode shapes.
+**Problem.** A 362S162-33 stud (web 92.1 mm, flanges 41.3 mm, lips 12.7 mm, t = 0.879 mm, E = 29 500 ksi = 203 395 MPa, ν = 0.3), 96 in (2438 mm) long, with 1.5 × 4 in SFIA service holes at 24 in on centre, braced at midheight so that Lx = Ly = Lt = 48 in, pinned warping-free ends, uniform compression.  We compute the elastic local, distortional, and global buckling loads and look at the mode shapes.
 
 Cells that run the finite element analysis are opt-in (checkboxes) so the notebook opens quickly; saved results from the paper are shown by default.
 """
@@ -137,7 +137,7 @@ Run the lowest-modes solve live (about one minute on a laptop, 250 000 dofs): $(
 
 # ╔═╡ b0deadf1-ded8-44a2-8c94-76388b45e367
 live = if run_live
-	let m = model, E = 200000.0, ν = 0.3, t = m.sec.t
+	let m = model, E = 29500.0 * 6.894757, ν = 0.3, t = m.sec.t    # 29 500 ksi
 		dh, n2d = SBT.setup_dofs(m)
 		ch = SBT.constraints(m, dh, n2d)
 		K = SBT.assemble_K(m, dh, ch, E, ν, t)

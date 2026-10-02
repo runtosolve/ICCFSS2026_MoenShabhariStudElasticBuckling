@@ -152,15 +152,15 @@ end
 let
     b = deserialize(joinpath(resdir, "baselines.jls"))
     A = b["A"]
-    fig = Figure(size = (PT_COL, 240))
-    ax = Axis(fig[1, 1]; xscale = log10, xlabel = "half-wavelength [mm]", ylabel = "P_cr [kN]", xticks = ([20, 50, 100, 200, 500, 1000, 2500], ["20", "50", "100", "200", "500", "1000", "2500"]))
-    lines!(ax, b["sig_L"], b["sig_fcr"] .* A ./ 1000; color = :black, linewidth = 1, label = "CUFSM, gross section")
+    fig = Figure(size = (PT_COL, 300), figure_padding = (4, 14, 4, 8))     # extra right/top padding so the end tick labels are not clipped
+    ax = Axis(fig[1, 1]; xscale = log10, xlabel = "half-wavelength [mm]", ylabel = rich("P", subscript("cr"), " [kN]"), xticks = ([20, 50, 100, 200, 500, 1000, 2500], ["20", "50", "100", "200", "500", "1000", "2500"]))
+    lines!(ax, b["sig_L"], b["sig_fcr"] .* A ./ 1000; color = :black, linewidth = 1, label = "CUFSM signature curve, gross section")
     c = b["csb_FE-matched"]
-    scatter!(ax, [c.Lcrl, c.Lcrd], [c.Pcrl, c.Pcrd] ./ 1000; marker = :circle, markersize = 7, color = :black, label = "gross local and distortional minima")
-    scatter!(ax, [c.Lcrl_hole], [c.Pcrl_hole] ./ 1000; marker = :utriangle, markersize = 8, color = :firebrick, label = "net-section local (hole)")
-    scatter!(ax, [c.Lcrd_hole], [c.Pcrd_hole] ./ 1000; marker = :dtriangle, markersize = 8, color = :firebrick, label = "reduced-t distortional (hole)")
-    scatter!(ax, [1219.2], [b["global_gross"].PFT] ./ 1000; marker = :diamond, markersize = 8, color = :black, label = "flexural-torsional, KL = 48 in")
-    scatter!(ax, [1219.2], [b["global_hole"].PFT] ./ 1000; marker = :diamond, markersize = 8, color = :firebrick, label = "flexural-torsional, net properties")
+    scatter!(ax, [c.Lcrl, c.Lcrd], [c.Pcrl, c.Pcrd] ./ 1000; marker = :circle, markersize = 7, color = :black, label = "CUFSM local and distortional minima, gross section")
+    scatter!(ax, [c.Lcrl_hole], [c.Pcrl_hole] ./ 1000; marker = :utriangle, markersize = 8, color = :firebrick, label = "CUFSM local, net section at a hole")
+    scatter!(ax, [c.Lcrd_hole], [c.Pcrd_hole] ./ 1000; marker = :dtriangle, markersize = 8, color = :firebrick, label = "CUFSM distortional, reduced web thickness for holes")
+    scatter!(ax, [1219.2], [b["global_gross"].PFT] ./ 1000; marker = :diamond, markersize = 8, color = :black, label = "Analytical flexural-torsional, gross section, KL = 48 in")
+    scatter!(ax, [1219.2], [b["global_hole"].PFT] ./ 1000; marker = :diamond, markersize = 8, color = :firebrick, label = "Analytical flexural-torsional, weighted-average net section")
     cols = Dict("M1" => :royalblue, "M2" => :darkorange)
     for tg in tags
         ld = loaded[tg]; el = tg[1:2]
@@ -173,18 +173,19 @@ let
             push!(xs_, Lhw); push!(ys_, P / 1000)
         end
         scatter!(ax, xs_, ys_; marker = el == "M1" ? :rect : :xcross, markersize = 8, color = get(cols, el, :gray), strokewidth = 0.5,
-                 label = "shell FE, $(row_label(tg))")
+                 label = "Shell FE, stud with holes, $(row_label(tg))")
     end
     ylims!(ax, 0, 80); xlims!(ax, 20, 2600)
-    Legend(fig[2, 1], ax; labelsize = 6.5, framevisible = false, nbanks = 2, rowgap = 2, colgap = 8, patchsize = (8, 8), tellwidth = false, tellheight = true, orientation = :vertical)
+    Legend(fig[2, 1], ax; labelsize = 7, framevisible = false, nbanks = 1, rowgap = 1, patchsize = (10, 8), tellwidth = false, tellheight = true, orientation = :vertical, halign = :left)
+    rowgap!(fig.layout, 4)
     savefig("fig_signature_curve", fig)
-    push!(alt, "fig_signature_curve: CUFSM finite strip signature curve of the gross 362S162-33 section (critical load versus half-wavelength) with markers for the local and distortional minima, the net-section and reduced-thickness hole values, the analytical global load at 48 in, and the shell finite element results for the perforated stud with the 5 mm and 2.5 mm meshes.")
+    push!(alt, "fig_signature_curve: CUFSM finite strip signature curve of the gross 362S162-33 section (critical load versus half-wavelength) with markers for the local and distortional minima, the net-section and reduced-thickness hole values, the analytical global loads at 48 in (gross and weighted-average net section), and the shell finite element results for the perforated stud with the 5 mm and 2.5 mm meshes; every legend entry names its source (CUFSM, analytical, or shell FE).")
 end
 
 # ── Figure 6 (optional, --stress): pre-buckling σ_zz around a hole (tri model, recomputed) ─
 if "--stress" in ARGS
     ld = loaded[tags[1]]; m = ld.m
-    E = 200000.0; ν = 0.3; t = m.sec.t
+    E = 29500.0 * 6.894757; ν = 0.3; t = m.sec.t     # E = 29 500 ksi = 203 395 MPa
     ch = SBT.constraints(m, ld.dh, ld.n2d; brace = ld.modes.brace)
     K = SBT.assemble_K(m, ld.dh, ch, E, ν, t)
     F = SBT.end_loads(m, ld.dh, ld.n2d); apply!(K, F, ch); u = K \ F; apply!(u, ch)
@@ -193,7 +194,7 @@ if "--stress" in ARGS
     z0 = m.hole.zc[1]
     xs, ys, zs = SBT.nodes_xyz(m)
     fig = Figure(size = (PT_COL, 120))
-    ax = Axis(fig[1, 1]; aspect = DataAspect(), xlabel = "z [mm]", ylabel = "y [mm]", title = "σ_zz / (P/A) on the web face")
+    ax = Axis(fig[1, 1]; aspect = DataAspect(), xlabel = "z [mm]", ylabel = "y [mm]", title = rich("σ", subscript("zz"), " / (P/A) on the web face"))
     polys = Vector{Point2f}[]; cols = Float64[]
     for (c, cell) in enumerate(m.grid.cells)
         (xc[c] < 0.5 && z0 - 120 <= zc[c] <= z0 + 120) || continue

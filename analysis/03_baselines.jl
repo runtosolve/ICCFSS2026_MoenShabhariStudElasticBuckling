@@ -7,7 +7,7 @@
 include(joinpath(@__DIR__, "stud_buckling_tools.jl"))
 using .StudBucklingTools, CUFSM, CeeSectionBuckling, SectionProperties, BucklingModeIdentification, Printf, Serialization, Statistics
 const CSB = CeeSectionBuckling
-E = 200000.0; ν = 0.30; G = E / (2(1 + ν)); t = 0.0346 * 25.4
+E = 29500.0 * 6.894757; ν = 0.30; G = E / (2(1 + ν)); t = 0.0346 * 25.4     # E = 29 500 ksi = 203 395 MPa
 L_col = 96 * 25.4; L_br = 48 * 25.4
 hole_w = 1.5 * 25.4; hole_ℓ = 4.0 * 25.4; hole_spacing = 24 * 25.4
 n_holes = 4; L_h_total = n_holes * hole_ℓ
@@ -43,6 +43,10 @@ res["cufsm_48in"] = (m = collect(1:60), L = Lm, Pcr = fm .* A)
 @printf("  CUFSM S-S 48 in: m = 1 (global): %.3f kN; minimum over m: %.3f kN at m = %d\n", fm[1]*A/1000, minimum(fm)*A/1000, argmin(fm))
 # distortional at 48 in: m = 2 and 3 half-waves (Lcrd ≈ 460 mm)
 res["cufsm_48in_m2"] = fm[2] * A; res["cufsm_48in_m3"] = fm[3] * A
+# higher modes at the braced length (m = 1): mode 2 is weak-axis flexure with distortional rotation of the flanges
+c48, _ = CUFSM.strip(prop, node, elem, [L_br], [], [], 4)
+res["cufsm_48in_modes"] = [c48[1][k, 2] * A for k in 1:size(c48[1], 1)]
+@printf("  CUFSM at 48 in, modes 1–4: %s kN\n", join([@sprintf("%.3f", P/1000) for P in res["cufsm_48in_modes"]], ", "))
 @printf("  CUFSM at L/2 = %.1f mm: %.3f kN; at L/3 = %.1f mm: %.3f kN\n", Lm[2], fm[2]*A/1000, Lm[3], fm[3]*A/1000)
 res["A"] = A; res["sig_L"] = sig_L; res["sig_fcr"] = fcr
 
@@ -120,6 +124,7 @@ open(joinpath(out, "baselines.csv"), "w") do io
     @printf(io, "CUFSM Pcrl gross, %.4f, %.4f, %.1f, signature curve minimum\n", res["cufsm_local"].Pcr/1000, res["cufsm_local"].Pcr/N_PER_KIP, res["cufsm_local"].Lcr)
     @printf(io, "CUFSM Pcrd gross, %.4f, %.4f, %.1f, signature curve minimum\n", res["cufsm_dist"].Pcr/1000, res["cufsm_dist"].Pcr/N_PER_KIP, res["cufsm_dist"].Lcr)
     @printf(io, "CUFSM global S-S 48 in (m = 1), %.4f, %.4f, %.1f, single half-wave over the braced length\n", fm[1]*A/1000, fm[1]*A/N_PER_KIP, L_br)
+    @printf(io, "CUFSM global S-S 48 in (m = 1) mode 2, %.4f, %.4f, %.1f, weak-axis flexure with flange distortion\n", res["cufsm_48in_modes"][2]/1000, res["cufsm_48in_modes"][2]/N_PER_KIP, L_br)
     @printf(io, "CUFSM 48 in m = 2, %.4f, %.4f, %.1f, two half-waves over the braced length\n", fm[2]*A/1000, fm[2]*A/N_PER_KIP, Lm[2])
     @printf(io, "CUFSM 48 in m = 3, %.4f, %.4f, %.1f, three half-waves over the braced length\n", fm[3]*A/1000, fm[3]*A/N_PER_KIP, Lm[3])
     for label in ("FE-matched", "SFIA")

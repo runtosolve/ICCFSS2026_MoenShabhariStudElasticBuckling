@@ -1,0 +1,13 @@
+362S162-33 stud, L = 96 in (2438.4 mm), uniform compression, pinned warping-free ends, braced at midheight (Lx = Ly = Lt = 48 in)
+No holes (unperforated reference model)
+Ferrite.jl + QuadShellFiniteElement.jl (40992 quadrilaterals) + TriShellFiniteElement.jl (0 triangles); 41565 nodes, 40992 shells, 249390 dofs, dz = 4.997 mm, section nodes = 85
+E = 203395.3315 MPa, ν = 0.3, t = 0.87884 mm, A = 170.72810421036928 mm²; Cs = tri 0.2, quad 0.1; brace = corners_x
+Timings [s]: assemble_K = 5.58, assemble_Kg = 1.72, eigs_lowest = 11.12, factorization = 12.25, shift_invert_total = 396.91, static_solve = 3.53, stresses = 0.47
+
+name, scan_index, Pcr_N, Pcr_kN, Pcr_kips, fcr_MPa, fcr_ksi, class, rb_frac, fl, wf, hole_frac, hole_ratio, hw_web, hw_tip, hw_tip_seg1, hw_tip_seg2, global_description
+Lowest local, 1, 15785.891, 15.7859, 3.5488, 92.462, 13.4105, local, 0.169, 0.011, 0.011, 0.000, 0.00, 18, 18, 9, 9, 
+Lowest distortional, 75, 37365.302, 37.3653, 8.4001, 218.859, 31.7427, distortional, 0.161, 0.894, 0.210, 0.000, 0.00, 5, 5, 3, 3, 
+Distortional (mixed, first classified), 75, 37365.302, 37.3653, 8.4001, 218.859, 31.7427, distortional, 0.161, 0.894, 0.210, 0.000, 0.00, 5, 5, 3, 3, 
+Global 1, 74, 37152.126, 37.1521, 8.3521, 217.610, 31.5616, global, 0.999, 1.000, 0.627, 0.000, 0.00, 5, 2, 1, 1, strong-axis flexure + torsion
+Global (mixed, first classified), 74, 37152.126, 37.1521, 8.3521, 217.610, 31.5616, global, 0.999, 1.000, 0.627, 0.000, 0.00, 5, 2, 1, 1, strong-axis flexure + torsion
+Global weak-axis, 102, 49576.299, 49.5763, 11.1452, 290.382, 42.1163, global, 0.932, 0.878, 0.798, 0.000, 0.00, 2, 2, 1, 1, weak-axis flexure

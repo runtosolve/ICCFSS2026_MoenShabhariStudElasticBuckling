@@ -14,7 +14,7 @@ holes), and compared with
 ## Contents
 | Path | What it is |
 |---|---|
-| `main.typ`, `references.bib`, `images/` | the paper (Typst); `typst compile main.typ Moen_Shabhari_ICCFSS_2026_open_source_shell_fea_stud_buckling.pdf` |
+| `main.typ`, `references.bib`, `images/` | the paper (Typst); `typst compile main.typ Moen_Shabhari_ICCFSS_2026_open_source_shell_fea_stud_buckling_r1.pdf` |
 | `analysis/stud_buckling_tools.jl` | shared module: section, hybrid structured-quad + Gmsh triangular hole-patch mesh, mixed-grid dofs (two `SubDofHandler`s), loads, constraints, K / Kg assembly per element type, ARPACK solves, mode classification |
 | `analysis/01_make_meshes.jl` | builds the mixed quadrilateral/triangle grid (`meshes/*.jls`); `--elements=tri` or `quad` give single-element grids |
 | `analysis/02_run_fe.jl` | eigenbuckling: lowest modes + shift-and-invert windows, classification, `results/modes_*.csv/jls`, `summary_*.txt` |
@@ -37,6 +37,8 @@ git clone https://github.com/runtosolve/TriShellFiniteElement.jl   # and QuadShe
 cd analysis
 julia --project=. 01_make_meshes.jl                    # M1: dz = 5 mm  (add --dz=2.5 --tag=M2 for the refined grids)
 julia --project=. 02_run_fe.jl --model=meshes/stud96_M1_mixed.jls   # and stud96_M2_mixed.jls for the refined check
+julia --project=. 01_make_meshes.jl --tag=M1nh --noholes               # unperforated reference model (all quadrilaterals)
+julia --project=. 02_run_fe.jl --model=meshes/stud96_M1nh_mixed.jls --shifts=14,16,18,20,28,31,34,37,40,43,50,55,60,65
 julia --project=. 03_baselines.jl
 julia --project=. 04_figures.jl --stress
 julia --project=. 05_results_table.jl

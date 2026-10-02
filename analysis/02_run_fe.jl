@@ -16,7 +16,7 @@ brace      = Symbol(getopt("brace", "corners_x"))
 nev        = parse(Int, getopt("nev", "12"))
 shifts_kN  = parse.(Float64, split(getopt("shifts", "14,16,18,20,28,31,34,37,40,43,50,55,60"), ","))
 nev_shift  = parse(Int, getopt("nev_shift", "40"))
-E = 200000.0; ν = 0.30
+E = 29500.0 * 6.894757; ν = 0.30     # E = 29 500 ksi = 203 395 MPa
 t = 0.0346 * 25.4
 
 m = SBT.load_model(model_path)
@@ -26,7 +26,7 @@ Cs = "tri $(Cs_tri), quad $(Cs_quad)"
 tag = getopt("tag", m.tag * (brace == :corners_x ? "" : "_$(brace)"))
 out = joinpath(@__DIR__, "results")
 ntri = count(c -> c isa Ferrite.Triangle, m.grid.cells); nquad = getncells(m.grid) - ntri
-println("Model $(m.tag): $(m.element) shells, $(getnnodes(m.grid)) nodes, $(getncells(m.grid)) cells ($(nquad) quadrilaterals, $(ntri) triangles), L = $(m.L) mm, dz = $(round(m.dz; digits = 3)) mm, holes at z = $(m.hole.zc) mm")
+println("Model $(m.tag): $(m.element) shells, $(getnnodes(m.grid)) nodes, $(getncells(m.grid)) cells ($(nquad) quadrilaterals, $(ntri) triangles), L = $(m.L) mm, dz = $(round(m.dz; digits = 3)) mm, " * (isempty(m.hole.zc) ? "no holes" : "holes at z = $(m.hole.zc) mm"))
 println("Shear relaxation Cs = $(Cs); brace = $(brace)")
 
 timing = Dict{String,Float64}()
@@ -48,8 +48,10 @@ t0 = time(); S = SBT.membrane_stresses(m, dh, u, E, ν, t); timing["stresses"] =
 σzz, xc, yc, zc = SBT.sigma_zz_normalized(m, dh, S, 1.0 / A)
 println("\nNormalized σ_zz / (P/A) by element rows (uniform compression = -1.00):")
 println("   z range [mm]          min      mean     max     (web elements: min / max)")
-for (lo, hi, name) in ((0.0, 2m.dz, "end"), (140.0, 160.0, "bulk"), (m.hole.zc[1] - m.dz, m.hole.zc[1] + m.dz, "hole 1 centre"),
-                       (m.hole.zc[1] - 60, m.hole.zc[1] - 50, "hole 1 end"), (m.L/2 - m.dz, m.L/2 + m.dz, "brace"), (m.L - 2m.dz, m.L, "end"))
+rows = Any[(0.0, 2m.dz, "end"), (140.0, 160.0, "bulk")]
+isempty(m.hole.zc) || append!(rows, [(m.hole.zc[1] - m.dz, m.hole.zc[1] + m.dz, "hole 1 centre"), (m.hole.zc[1] - 60, m.hole.zc[1] - 50, "hole 1 end")])
+append!(rows, [(m.L/2 - m.dz, m.L/2 + m.dz, "brace"), (m.L - 2m.dz, m.L, "end")])
+for (lo, hi, name) in rows                      # (no hole rows for an unperforated model built with --noholes)
     idx = findall(lo .<= zc .<= hi); isempty(idx) && continue
     web = idx[xc[idx] .< 0.5]
     @printf("   %6.1f–%6.1f %-13s %7.3f  %7.3f  %7.3f   (%7.3f / %7.3f)\n", lo, hi, name, minimum(σzz[idx]), mean(σzz[idx]), maximum(σzz[idx]),
@@ -103,7 +105,7 @@ serialize(joinpath(out, "modes_$(tag).jls"),
 
 open(joinpath(out, "summary_$(tag).txt"), "w") do io
     println(io, "362S162-33 stud, L = 96 in (2438.4 mm), uniform compression, pinned warping-free ends, braced at midheight (Lx = Ly = Lt = 48 in)")
-    println(io, "SFIA service holes $(m.hole.w) x $(m.hole.ℓ) mm at z = $(m.hole.zc) mm")
+    println(io, isempty(m.hole.zc) ? "No holes (unperforated reference model)" : "SFIA service holes $(m.hole.w) x $(m.hole.ℓ) mm at z = $(m.hole.zc) mm")
     println(io, "Ferrite.jl + QuadShellFiniteElement.jl ($(nquad) quadrilaterals) + TriShellFiniteElement.jl ($(ntri) triangles); $(getnnodes(m.grid)) nodes, $(getncells(m.grid)) shells, $(ndofs(dh)) dofs, dz = $(round(m.dz; digits = 3)) mm, section nodes = $(length(m.sec.X))")
     println(io, "E = $(E) MPa, ν = $(ν), t = $(t) mm, A = $(A) mm²; Cs = $(Cs); brace = $(brace)")
     println(io, "Timings [s]: " * join(["$(k) = $(round(v; digits = 2))" for (k, v) in sort(collect(timing))], ", "))
