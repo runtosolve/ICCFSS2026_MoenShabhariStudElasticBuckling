@@ -1,0 +1,2 @@
+{"M1": {"assemble_K": 6.02, "static_solve": 3.27, "assemble_Kg": 1.96, "factorization": 9.53, "eigs_lowest": 8.57, "shift_invert_total": 356.06},
+ "M2": {"assemble_K": 8.56, "static_solve": 5.56, "assemble_Kg": 3.49, "factorization": 19.8, "eigs_lowest": 17.9, "shift_invert_total": 902.6}}
