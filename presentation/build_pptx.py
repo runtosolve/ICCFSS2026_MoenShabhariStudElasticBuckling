@@ -107,6 +107,12 @@ def two_content(title):
     geo = [(x.left, x.top, x.width, x.height) for x in (a, b)]
     return s, a, b, geo
 
+def resize(shape, height):
+    """set height on a placeholder that inherits its frame from the layout; python-pptx would otherwise write
+    an xfrm with offset 0,0 and width 0 (text collapses into a one-character column at the left edge)"""
+    l, t, w = shape.left, shape.top, shape.width
+    shape.left, shape.top, shape.width, shape.height = l, t, w, height
+
 def remove(shape): shape._element.getparent().remove(shape._element)
 
 # ───────────────────────────── 1 title ─────────────────────────────
@@ -117,7 +123,7 @@ runs(sub.text_frame.paragraphs[0], "Cristopher D. Moen and Amoke Shabhari", 22, 
 p = sub.text_frame.add_paragraph(); runs(p, "RunToSolve LLC", 18, color=MUTED)
 p = sub.text_frame.add_paragraph(); runs(p, "Wei-Wen Yu International Specialty Conference on Cold-Formed Steel Structures, Madison, Wisconsin", 14, color=MUTED)
 s.shapes.add_picture(os.path.join(DATA, "qr.png"), Inches(11.4), Inches(5.6), Inches(1.5), Inches(1.5))
-tb = s.shapes.add_textbox(Inches(8.9), Inches(7.05), Inches(4.2), Inches(0.3))
+tb = s.shapes.add_textbox(Inches(7.9), Inches(7.05), Inches(5.0), Inches(0.3))
 runs(tb.text_frame.paragraphs[0], "runtosolve.github.io/ICCFSS2026_MoenShabhariStudElasticBuckling", 9, color=MUTED); tb.text_frame.paragraphs[0].alignment = PP_ALIGN.RIGHT
 
 # ───────────────────────────── 2 motivation ─────────────────────────────
@@ -127,7 +133,7 @@ s2 = content_slide("Shell finite element analysis, in the open", [
     "Two Mindlin shell elements are now published as packages with elastic and geometric stiffness matrices",
     ("**TriShellFiniteElement.jl**, a 3-node triangle", 1), ("**QuadShellFiniteElement.jl**, a \"4+2\" quadrilateral", 1),
     "This talk walks through one eigenbuckling analysis of a common wall stud with holes"])
-textbox(s2, Inches(0.9), Inches(5.0), Inches(11.5), Inches(0.5), ["Thanks to Sándor Ádány for the shell element formulations and MATLAB reference implementations"], 12, color=MUTED, bullet=False)
+textbox(s2, Inches(0.9), Inches(6.2), Inches(11.5), Inches(0.5), ["Thanks to Sándor Ádány for the shell element formulations and MATLAB reference implementations"], 12, color=MUTED, bullet=False)
 
 # ───────────────────────────── 3 elements ─────────────────────────────
 s, a, b, geo = two_content("Two flat Mindlin shells, six degrees of freedom per node")
@@ -139,7 +145,7 @@ bullets(b.text_frame, ["**Quadrilateral, QuadShellFiniteElement.jl**",
     ("The \"4+2\" element of Moen and Ádány: bilinear shape functions plus two bubble functions, condensed at the element level, which relieves in-plane bending stiffness and part of the shear locking", 1),
     ("Same shear relaxation (Cs = 0.1) and drilling term", 1),
     ("Julia matrices reproduce the MATLAB reference to machine precision (a package test)", 1)], 18, 15)
-for x in (a, b): x.height = Inches(3.9)
+for x in (a, b): resize(x, Inches(3.9))
 textbox(s, Inches(0.9), Inches(5.6), Inches(11.5), Inches(1.2), [
     "Geometric stiffness from the Green–Lagrange membrane strains (Nx, Ny, Nxy and the gradients of all three translations)",
     "K φ = λ (−Kg) φ, and with a unit reference load the eigenvalue is the buckling load"], 16)
@@ -151,8 +157,8 @@ bullets(a.text_frame, ["Web 3.625 in, flange 1.625 in, lip 0.5 in, design thickn
     "Four 1.5 × 4 in stadium-shaped holes at 12, 36, 60, and 84 in (24 in o.c.); the brace point is 12 in from the nearest holes"], 16, 14)
 bullets(b.text_frame, ["Centerline polyline from CrossSectionGeometry.jl: 85 nodes, corner radius 2t, 4 elements per lip, 20 per flange and web, 4 per corner arc",
     "The same polyline goes to CUFSM.jl, so the shell and finite strip analyses share their geometry"], 16, 14)
-for x in (a, b): x.height = Inches(2.3)
-picture(s, "fig_mesh_hole.png", Inches(0.9), Inches(4.0), Inches(11.5), Inches(2.6),
+for x in (a, b): resize(x, Inches(2.6))
+picture(s, "fig_mesh_hole.png", Inches(0.9), Inches(4.35), Inches(11.5), Inches(2.3),
         "(a) 85-node centerline polyline; (b) web mesh around a hole: structured quadrilaterals outside the 150 mm patch, triangles inside it")
 
 # ───────────────────────────── 7 dofs & BCs ─────────────────────────────
@@ -266,7 +272,7 @@ runs(sub.text_frame.paragraphs[0], "Cristopher D. Moen and Amoke Shabhari", 22, 
 p = sub.text_frame.add_paragraph(); runs(p, "RunToSolve LLC", 18, color=MUTED)
 p = sub.text_frame.add_paragraph(); runs(p, "Wei-Wen Yu International Specialty Conference on Cold-Formed Steel Structures, Madison, Wisconsin", 14, color=MUTED)
 s.shapes.add_picture(os.path.join(DATA, "qr.png"), Inches(11.4), Inches(5.6), Inches(1.5), Inches(1.5))
-tb = s.shapes.add_textbox(Inches(8.9), Inches(7.05), Inches(4.2), Inches(0.3))
+tb = s.shapes.add_textbox(Inches(7.9), Inches(7.05), Inches(5.0), Inches(0.3))
 runs(tb.text_frame.paragraphs[0], "runtosolve.github.io/ICCFSS2026_MoenShabhariStudElasticBuckling", 9, color=MUTED); tb.text_frame.paragraphs[0].alignment = PP_ALIGN.RIGHT
 
 # carry the template's date and slide-number footers onto every slide (copied from each slide's layout)

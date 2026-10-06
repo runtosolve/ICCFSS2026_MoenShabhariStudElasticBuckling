@@ -1,6 +1,6 @@
 # ICCFSS 2026 talk — Moen & Shabhari
 
-Two versions of the same 19-slide talk, built from the paper:
+Two versions of the same 14-slide talk, built from the paper:
 
 | File | What it is |
 |---|---|

@@ -11,6 +11,12 @@ combines the open-source Mindlin elements [QuadShellFiniteElement.jl](https://gi
 holes), and compared with
 [CUFSM.jl](https://github.com/runtosolve/CUFSM.jl) and [CeeSectionBuckling.jl](https://github.com/runtosolve/CeeSectionBuckling.jl).
 
+## Presentation
+The ICCFSS 2026 talk: **[view the slides in a browser](https://runtosolve.github.io/ICCFSS2026_MoenShabhariStudElasticBuckling/presentation/)**
+(`→`/`←` navigate, `f` fullscreen), or download the
+[PDF](presentation/Moen_Shabhari_ICCFSS_2026_slides.pdf) or [PowerPoint](presentation/Moen_Shabhari_ICCFSS_2026.pptx).
+Sources and build steps are in [`presentation/`](presentation/README.md).
+
 ## Contents
 | Path | What it is |
 |---|---|
